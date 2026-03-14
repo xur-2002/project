@@ -1,0 +1,21 @@
+field_name,data_type,business_definition,sample_value,design_reason
+date,date,统计日期,2026-01-15,支持日级趋势监控与异常定位
+week_day,string,星期信息,Monday,区分工作日与周末波动
+hour_bucket,string,时段分层,evening,定位异常集中时窗
+content_category,string,内容类目,entertainment,识别类目结构贡献
+traffic_source,string,流量来源,recommendation,定位渠道来源问题
+user_type,string,用户类型,new_user,新老用户差异归因
+city_tier,string,城市层级,tier1,分析城市商业化差异
+experiment_group,string,实验组别,B,A/B Test对比主键
+content_supply_cnt,int,当日供给内容量,1450,解释供给驱动波动
+exposure,int,曝光次数,125000,核心分母指标
+click,int,点击次数,10250,计算CTR
+view_complete,int,完播次数,5120,衡量消费质量
+like_cnt,int,点赞次数,2310,互动质量指标
+comment_cnt,int,评论次数,580,互动深度指标
+share_cnt,int,分享次数,220,传播意愿指标
+report_cnt,int,举报次数,125,风险护栏指标
+conversion_cnt,int,转化次数,760,商业结果指标
+avg_watch_seconds,float,人均观看时长,31.6,体验质量补充
+monetization_revenue,float,当日变现收入,28650.5,商业结果补充
+session_uv,int,访问用户数,45200,流量规模观察
