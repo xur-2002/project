@@ -2,7 +2,7 @@
 Data-Driven Decision Support for Evaluating AI-Generated Advertising Content in a Simulated Content Platform
 
 # Authors and Team
-[Fill in author names and team members]
+Rui
 
 ## 1. Executive Summary
 - Decision to be supported: help a simulated content-platform team decide how to monitor KPI health, diagnose abnormal performance changes, and interpret whether an experimental content strategy should be scaled, limited, or rolled back.
