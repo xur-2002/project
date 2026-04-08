@@ -2,7 +2,7 @@
 Data-Driven Decision Support for Evaluating AI-Generated Advertising Content in a Simulated Content Platform
 
 # Authors and Team
-[Fill in author names and team members]
+Rui
 
 ## 1. What the project is
 This project is a simulated analytics and decision-support prototype for a content platform. It combines KPI monitoring, anomaly detection, segmented diagnosis, A/B evaluation, and a dashboard prototype to support business decisions about platform quality, growth, and risk.
