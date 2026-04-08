@@ -1,0 +1,10 @@
+# Notebook snippet: predictive model outputs
+import pandas as pd
+
+metrics = pd.read_csv('reports/outputs/predictive_model_metrics.csv')
+print(metrics)
+
+summary_path = 'reports/outputs/predictive_model_summary.md'
+figure_path = 'reports/figures/predictive_model_results.png'
+print(summary_path)
+print(figure_path)
