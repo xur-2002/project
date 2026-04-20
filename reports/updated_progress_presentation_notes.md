@@ -15,15 +15,18 @@ This project is a simulated analytics and decision-support prototype for a conte
 - Added a logistic-regression classifier that predicts above-median conversion performance for segment-day observations.
 - Added a detailed interpretation note for every factor shown in the logistic coefficient chart.
 - Added a Random Forest benchmark on the same task for direct comparison against Logistic Regression.
+- Added nested cross-validation so hyperparameter tuning and feature selection are evaluated inside the validation workflow instead of relying only on the earlier single train/test split.
 
 ## 3. What the key current results are
 - The simulated dataset contains 97,200 rows, 20 variables, and no missing or duplicate rows in the current outputs.
 - The anomaly workflow currently flags 24 anomalies using 7-day rolling baselines and segment-level rules.
 - Root-cause analysis isolates three main cases: CTR decline, report-rate spike, and conversion-rate decline.
 - The A/B module shows that variant B improves CTR, conversion rate, and revenue, but worsens report rate and complete rate, so the current recommendation is staged rollout rather than full launch.
-- The new predictive prototype uses logistic regression and reached accuracy of 0.6219, precision of 0.6082, recall of 0.7879, F1-score of 0.6865, and ROC-AUC of 0.6606 on a time-based test split.
+- The earlier time-based split remains useful as an initial baseline, but the new nested-CV workflow is the more reliable comparison.
+- In nested CV, Logistic Regression averaged accuracy 0.5940, F1-score 0.6372, and ROC-AUC 0.6383.
+- In nested CV, Random Forest averaged accuracy 0.5939, F1-score 0.6477, and ROC-AUC 0.6367.
 - The strongest positive signal is `traffic_source = search`, while `user_type = new_user` is the strongest negative signal for above-median conversion performance.
-- The Random Forest benchmark did not outperform Logistic Regression on this task, so the more interpretable model remains the better presentation choice.
+- Logistic Regression has slightly better average ROC-AUC, while Random Forest has slightly better average F1-score, so the result is best explained as a tradeoff rather than a single definitive winner.
 
 ## 4. What the next steps are
 - Finalize the updated report and presentation storyline for April 24.
@@ -37,6 +40,6 @@ This project is a simulated analytics and decision-support prototype for a conte
 4. Walk through one root-cause case to show how segmented diagnosis works.
 5. Present the A/B evaluation and explain the tradeoff between growth and guardrail metrics.
 6. Explain the logistic coefficient chart and what the strongest positive and negative factors mean.
-7. Show the Random Forest comparison and explain why Logistic Regression still remains the better project-facing model.
+7. Show the nested cross-validation comparison and explain the Logistic Regression vs Random Forest tradeoff.
 8. Show the dashboard prototype and appendix outputs.
 9. Close with what is complete, what is still in progress, and the limitations of the predictive extension.
