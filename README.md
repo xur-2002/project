@@ -96,3 +96,13 @@ py -m venv .venv
 4. 归因分析: reports/step6_root_cause_analysis.md, reports/tables/root_cause_summary.csv
 5. 实验评估: reports/step7_ab_test_evaluation.md, reports/tables/ab_test_summary.csv
 6. 最终报告: reports/final_project_report.md
+
+# Final Integrated Report
+
+The final English report package for the ESE 527 project is available at:
+
+- `reports/final_integrated_project_report.md`
+- `reports/final_integrated_presentation_notes.md`
+- `reports/outputs/final_report_asset_checklist.md`
+
+This package integrates KPI monitoring, anomaly detection, segmented diagnosis, simulated A/B evaluation, the predictive modeling prototype, factor interpretation, Random Forest benchmarking, and nested cross-validation model comparison.
