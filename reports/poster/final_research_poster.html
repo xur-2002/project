@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Data-Driven Decision Support Poster</title>
+<style>
+  @page { size: 24in 36in; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #e8edf3; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #172033;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .poster {
+    width: 24in;
+    min-height: 36in;
+    margin: 0 auto;
+    background: #f8fafc;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    border-top: 0.18in solid #0f4c81;
+  }
+  .header {
+    padding: 0.46in 0.62in 0.32in 0.62in;
+    background: linear-gradient(180deg, #ffffff 0%, #eef5fb 100%);
+    border-bottom: 0.035in solid #c8d7e6;
+  }
+  .title {
+    font-size: 37pt;
+    line-height: 1.05;
+    font-weight: 800;
+    color: #0b3558;
+    margin: 0 0 0.16in 0;
+    letter-spacing: 0;
+  }
+  .meta-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.35in;
+  }
+  .author {
+    font-size: 20pt;
+    font-weight: 700;
+    color: #26384f;
+    margin-bottom: 0.06in;
+  }
+  .subtitle {
+    font-size: 13.2pt;
+    line-height: 1.28;
+    color: #46586e;
+    max-width: 12.2in;
+    margin-top: 0.06in;
+  }
+  .badge-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.12in;
+    width: 8.65in;
+  }
+  .badge {
+    background: #ffffff;
+    border: 0.018in solid #b8cbe0;
+    border-radius: 0.08in;
+    padding: 0.12in 0.14in;
+    min-height: 0.58in;
+  }
+  .badge .value {
+    font-size: 18pt;
+    line-height: 1;
+    font-weight: 800;
+    color: #0f4c81;
+  }
+  .badge .label {
+    margin-top: 0.04in;
+    font-size: 8.8pt;
+    text-transform: uppercase;
+    color: #56677a;
+    font-weight: 700;
+  }
+  .body {
+    padding: 0.34in 0.52in 0.22in 0.52in;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.28in;
+    align-items: start;
+  }
+  .col { display: flex; flex-direction: column; gap: 0.19in; min-width: 0; }
+  .section {
+    background: #ffffff;
+    border: 0.018in solid #d4dee8;
+    border-left: 0.07in solid #0f4c81;
+    border-radius: 0.08in;
+    padding: 0.18in 0.19in 0.18in 0.19in;
+    box-shadow: 0 0.035in 0.08in rgba(20, 45, 72, 0.08);
+  }
+  .section.compact { padding-bottom: 0.15in; }
+  h2 {
+    margin: 0 0 0.11in 0;
+    font-size: 18pt;
+    line-height: 1.12;
+    color: #0b3558;
+    font-weight: 800;
+    letter-spacing: 0;
+  }
+  h3 {
+    margin: 0.09in 0 0.06in 0;
+    font-size: 12.5pt;
+    line-height: 1.15;
+    color: #24384f;
+    font-weight: 800;
+  }
+  p, li {
+    font-size: 11.1pt;
+    line-height: 1.28;
+    margin: 0;
+  }
+  p + p { margin-top: 0.06in; }
+  ul { margin: 0; padding-left: 0.18in; }
+  li { margin-bottom: 0.045in; }
+  .callout {
+    background: #eef6f4;
+    border: 0.016in solid #b7d8d2;
+    border-radius: 0.07in;
+    padding: 0.12in 0.14in;
+    font-size: 11.2pt;
+    line-height: 1.28;
+    color: #173f3d;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.7pt;
+    line-height: 1.17;
+  }
+  th {
+    background: #0f4c81;
+    color: white;
+    font-weight: 800;
+    text-align: left;
+    padding: 0.055in 0.065in;
+    border: 0.01in solid #0f4c81;
+  }
+  td {
+    padding: 0.05in 0.065in;
+    border: 0.01in solid #cfd9e3;
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) td { background: #f3f7fb; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .mini-table td:first-child { font-weight: 700; color: #24384f; }
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.07in;
+    margin: 0.1in 0 0.02in 0;
+  }
+  .metric {
+    border: 0.014in solid #c8d7e6;
+    background: #f7fbff;
+    border-radius: 0.06in;
+    padding: 0.075in 0.05in;
+    text-align: center;
+  }
+  .metric .mvalue { font-size: 14pt; line-height: 1; font-weight: 800; color: #0f4c81; }
+  .metric .mlabel { font-size: 7.9pt; line-height: 1.1; margin-top: 0.035in; color: #506176; font-weight: 700; }
+  .workflow {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.08in;
+  }
+  .step {
+    border: 0.014in solid #bfd0df;
+    border-radius: 0.07in;
+    padding: 0.09in 0.1in;
+    background: #f7fbff;
+    min-height: 0.54in;
+  }
+  .step b { display: block; font-size: 10.3pt; color: #0b3558; margin-bottom: 0.02in; }
+  .step span { display: block; font-size: 9.2pt; line-height: 1.18; color: #4d6075; }
+  figure { margin: 0; }
+  .fig {
+    width: 100%;
+    display: block;
+    border: 0.016in solid #cfd9e3;
+    border-radius: 0.07in;
+    background: #fff;
+  }
+  figcaption {
+    margin-top: 0.045in;
+    font-size: 8.8pt;
+    line-height: 1.18;
+    color: #4d6075;
+  }
+  .descriptive-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.09in;
+  }
+  .thumb .fig { height: 1.34in; object-fit: contain; padding: 0.03in; }
+  .thumb figcaption { font-size: 8.2pt; font-weight: 700; color: #35495e; }
+  .predictive-fig { height: 3.25in; object-fit: contain; padding: 0.045in; }
+  .comparison-fig { height: 2.02in; object-fit: contain; padding: 0.045in; }
+  .nested-fig { height: 2.72in; object-fit: contain; padding: 0.045in; }
+  .two-col-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.1in;
+  }
+  .factor-box {
+    border-radius: 0.07in;
+    padding: 0.1in 0.11in;
+    border: 0.014in solid #cedbe7;
+  }
+  .factor-box.positive { background: #eef8f3; border-color: #b6d8c4; }
+  .factor-box.negative { background: #fff5f2; border-color: #e6c2b7; }
+  .factor-box h3 { margin: 0 0 0.055in 0; font-size: 11pt; }
+  .factor-box li { font-size: 9.6pt; margin-bottom: 0.025in; }
+  .keyline {
+    display: grid;
+    grid-template-columns: 0.22in 1fr;
+    gap: 0.07in;
+    align-items: start;
+    margin-bottom: 0.065in;
+    font-size: 10.6pt;
+    line-height: 1.24;
+  }
+  .num-dot {
+    width: 0.2in;
+    height: 0.2in;
+    border-radius: 0.1in;
+    background: #0f4c81;
+    color: white;
+    font-weight: 800;
+    font-size: 8pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    margin-top: 0.005in;
+  }
+  .footer {
+    padding: 0.08in 0.58in 0.16in 0.58in;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    color: #5d6c7a;
+    font-size: 8.7pt;
+    border-top: 0.018in solid #d5e0ea;
+  }
+  .note { text-align: right; font-size: 8.5pt; color: #667482; }
+  .source { max-width: 12in; line-height: 1.2; }
+  .tight td, .tight th { padding-top: 0.042in; padding-bottom: 0.042in; }
+  .small { font-size: 9.8pt; line-height: 1.24; }
+</style>
+</head>
+<body>
+  <main class="poster">
+    <header class="header">
+      <h1 class="title">Data-Driven Decision Support for Evaluating AI-Generated Advertising Content in a Simulated Content Platform</h1>
+      <div class="meta-row">
+        <div>
+          <div class="author">Rui Xu</div>
+          <div class="subtitle">Academic research poster for an ESE 527 advertising analytics project. The work combines KPI monitoring, anomaly diagnosis, simulated A/B evaluation, interpretable prediction, and nested cross-validation into one decision-support workflow.</div>
+        </div>
+        <div class="badge-row" aria-label="project summary metrics">
+          <div class="badge"><div class="value">97,200</div><div class="label">observations</div></div>
+          <div class="badge"><div class="value">20</div><div class="label">variables</div></div>
+          <div class="badge"><div class="value">0</div><div class="label">missing / duplicate rows</div></div>
+        </div>
+      </div>
+    </header>
+
+    <section class="body">
+      <div class="col">
+        <section class="section">
+          <h2>Background / Motivation</h2>
+          <p>AI-generated advertising content can scale creative production, but small businesses still need a structured way to evaluate whether content performs well across contexts.</p>
+          <p>The project frames analytics as decision support: monitor platform health, detect abnormal movement, diagnose likely drivers, compare experiment variants, and estimate which contexts are more likely to produce high conversion performance.</p>
+        </section>
+
+        <section class="section compact">
+          <h2>Objective / Research Question</h2>
+          <ul>
+            <li>Can a simulated content-platform workflow support decisions about which content contexts are more likely to perform well?</li>
+            <li>Can descriptive analytics and predictive modeling be combined into one practical decision-support workflow?</li>
+          </ul>
+        </section>
+
+        <section class="section compact">
+          <h2>Data Description</h2>
+          <table class="mini-table tight">
+            <tbody>
+              <tr><td>Observations</td><td class="num">97,200</td><td>Variables</td><td class="num">20.0000</td></tr>
+              <tr><td>Numeric variables</td><td class="num">12.0000</td><td>Categorical variables</td><td class="num">8.0000</td></tr>
+              <tr><td>Time variables</td><td class="num">1.0000</td><td>Missing values</td><td class="num">0.0000</td></tr>
+              <tr><td>Duplicate rows</td><td class="num">0.0000</td><td>Data type</td><td>Simulated platform data</td></tr>
+            </tbody>
+          </table>
+          <p class="small" style="margin-top:0.09in;">Rows combine content category, traffic source, user type, city tier, experiment group, KPI fields, and time-related context.</p>
+        </section>
+
+        <section class="section">
+          <h2>Methods / Workflow</h2>
+          <div class="workflow">
+            <div class="step"><b>1. KPI monitoring</b><span>Track funnel health and rate measures over time.</span></div>
+            <div class="step"><b>2. Anomaly detection</b><span>Flag unusual KPI changes for follow-up diagnosis.</span></div>
+            <div class="step"><b>3. Segmented diagnosis</b><span>Compare content, traffic, user, and time segments.</span></div>
+            <div class="step"><b>4. Simulated A/B evaluation</b><span>Review experiment groups on business metrics.</span></div>
+            <div class="step"><b>5. Predictive modeling</b><span>Classify high conversion performance with leakage controls.</span></div>
+            <div class="step"><b>6. Nested CV</b><span>Tune models and select features inside validation folds.</span></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Descriptive Analytics Results</h2>
+          <div class="descriptive-grid">
+            <figure class="thumb"><img class="fig" src="../figures/dashboard_overview.png" alt="Dashboard overview"><figcaption>Dashboard overview</figcaption></figure>
+            <figure class="thumb"><img class="fig" src="../figures/anomaly_detection.png" alt="Anomaly detection"><figcaption>Anomaly alerts</figcaption></figure>
+            <figure class="thumb"><img class="fig" src="../figures/segmented_analysis.png" alt="Segmented analysis"><figcaption>Segmented diagnosis</figcaption></figure>
+            <figure class="thumb"><img class="fig" src="../figures/ab_test_comparison.png" alt="A/B comparison"><figcaption>Simulated A/B comparison</figcaption></figure>
+          </div>
+          <table class="tight" style="margin-top:0.12in;">
+            <thead><tr><th>Experiment</th><th class="num">CTR</th><th class="num">Conversion Rate</th><th class="num">Conversions</th></tr></thead>
+            <tbody>
+              <tr><td>Group A</td><td class='num'>0.1015</td><td class='num'>0.0710</td><td class='num'>579,283</td></tr>
+              <tr><td>Group B</td><td class='num'>0.1040</td><td class='num'>0.0726</td><td class='num'>606,707</td></tr>
+            </tbody>
+          </table>
+          <p class="small" style="margin-top:0.08in;">The descriptive layer supports monitoring, early warning, diagnosis, and simulated experiment review before predictive modeling.</p>
+        </section>
+      </div>
+
+      <div class="col">
+        <section class="section">
+          <h2>Predictive Modeling Results</h2>
+          <p>The predictive task is binary classification of high conversion performance. The target is defined using the training-set median conversion rate; feature inputs cover content, traffic, user, experiment, time, and session context. Downstream leakage variables are excluded.</p>
+          <figure style="margin-top:0.12in;"><img class="fig predictive-fig" src="../figures/predictive_model_results.png" alt="Logistic regression ROC curve, confusion matrix, and coefficients"><figcaption>Logistic Regression result panels: ROC curve, confusion matrix, and top coefficients.</figcaption></figure>
+          <div class="metric-grid">
+            <div class="metric"><div class="mvalue">0.6219</div><div class="mlabel">Accuracy</div></div>
+            <div class="metric"><div class="mvalue">0.6082</div><div class="mlabel">Precision</div></div>
+            <div class="metric"><div class="mvalue">0.7879</div><div class="mlabel">Recall</div></div>
+            <div class="metric"><div class="mvalue">0.6865</div><div class="mlabel">F1-score</div></div>
+            <div class="metric"><div class="mvalue">0.6606</div><div class="mlabel">ROC-AUC</div></div>
+          </div>
+        </section>
+
+        <section class="section compact">
+          <h2>Coefficient Interpretation</h2>
+          <div class="two-col-list">
+            <div class="factor-box positive">
+              <h3>Higher predicted conversion association</h3>
+              <ul>
+                <li>Search traffic</li>
+                <li>Active users</li>
+                <li>Returning users</li>
+                <li>Experiment group B</li>
+                <li>Session UV</li>
+              </ul>
+            </div>
+            <div class="factor-box negative">
+              <h3>Lower predicted conversion association</h3>
+              <ul>
+                <li>New users</li>
+                <li>Recommendation traffic</li>
+                <li>Follow traffic</li>
+                <li>Nearby traffic</li>
+                <li>Experiment group A</li>
+              </ul>
+            </div>
+          </div>
+          <p class="small" style="margin-top:0.1in;">Coefficients are directional associations in simulated data. They support business hypotheses, not causal claims.</p>
+        </section>
+
+        <section class="section">
+          <h2>Initial Model Comparison</h2>
+          <table class="tight">
+            <thead><tr><th>Model</th><th class="num">Accuracy</th><th class="num">Precision</th><th class="num">Recall</th><th class="num">F1-score</th><th class="num">ROC-AUC</th></tr></thead>
+            <tbody>
+              <tr><td>Logistic Regression</td><td class='num'>0.6219</td><td class='num'>0.6082</td><td class='num'>0.7879</td><td class='num'>0.6865</td><td class='num'>0.6606</td></tr>
+              <tr><td>Random Forest</td><td class='num'>0.6133</td><td class='num'>0.6090</td><td class='num'>0.7371</td><td class='num'>0.6670</td><td class='num'>0.6536</td></tr>
+            </tbody>
+          </table>
+          <figure style="margin-top:0.12in;"><img class="fig comparison-fig" src="../figures/model_comparison_results.png" alt="Initial model comparison"><figcaption>Initial split comparison: Logistic Regression is slightly stronger on ROC-AUC and remains easier to explain; Random Forest is a useful benchmark.</figcaption></figure>
+        </section>
+
+        <section class="section compact">
+          <h2>Validated Modeling Setup</h2>
+          <table class="tight mini-table">
+            <tbody>
+              <tr><td>Outer CV</td><td>3 shuffled KFold folds</td></tr>
+              <tr><td>Inner CV</td><td>3 StratifiedKFold folds</td></tr>
+              <tr><td>Tuning metric</td><td>ROC-AUC</td></tr>
+              <tr><td>Feature selection</td><td>SelectKBest inside the pipeline</td></tr>
+              <tr><td>Target threshold</td><td>Computed only from each outer training fold</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+
+      <div class="col">
+        <section class="section">
+          <h2>Model Comparison and Validation</h2>
+          <figure><img class="fig nested-fig" src="../figures/nested_cv_model_comparison.png" alt="Nested cross-validation model comparison"><figcaption>Nested CV is the strongest validation figure because model tuning and feature selection occur inside the validation workflow.</figcaption></figure>
+          <table class="tight" style="margin-top:0.12in;">
+            <thead><tr><th>Model</th><th class="num">Accuracy</th><th class="num">Precision</th><th class="num">Recall</th><th class="num">F1-score</th><th class="num">ROC-AUC</th></tr></thead>
+            <tbody>
+              <tr><td>Logistic Regression</td><td class='num'>0.5940</td><td class='num'>0.5767</td><td class='num'>0.7126</td><td class='num'>0.6372</td><td class='num'>0.6383</td></tr>
+              <tr><td>Random Forest</td><td class='num'>0.5939</td><td class='num'>0.5724</td><td class='num'>0.7458</td><td class='num'>0.6477</td><td class='num'>0.6367</td></tr>
+            </tbody>
+          </table>
+          <div class="callout" style="margin-top:0.11in;"><b>Validation interpretation:</b> Logistic Regression has slightly better ROC-AUC. Random Forest has slightly better recall and F1-score. The difference is small; the main improvement is stronger validation logic, not dramatic metric gains.</div>
+        </section>
+
+        <section class="section compact">
+          <h2>Key Findings</h2>
+          <div class="keyline"><span class="num-dot">1</span><span>The project integrates descriptive, diagnostic, experimental, and predictive analytics into one workflow.</span></div>
+          <div class="keyline"><span class="num-dot">2</span><span>Search traffic and established user types are more associated with high conversion performance.</span></div>
+          <div class="keyline"><span class="num-dot">3</span><span>Logistic Regression remains the most interpretable predictive baseline.</span></div>
+          <div class="keyline"><span class="num-dot">4</span><span>Random Forest is useful as a benchmark but is not clearly better.</span></div>
+          <div class="keyline"><span class="num-dot">5</span><span>Nested CV improves rigor and reduces the risk of over-optimistic evaluation.</span></div>
+        </section>
+
+        <section class="section compact">
+          <h2>Limitations</h2>
+          <ul>
+            <li>Source data is simulated, not live operational data.</li>
+            <li>The A/B module is simulated rather than a real deployed experiment.</li>
+            <li>Predictive models are prototypes and require external validation.</li>
+            <li>Coefficients show association, not causation.</li>
+          </ul>
+        </section>
+
+        <section class="section compact">
+          <h2>Conclusion / Next Steps</h2>
+          <p>The project moved from monitoring and diagnosis toward an initial predictive workflow for evaluating AI-generated advertising content. Nested cross-validation strengthened the validation design by moving target thresholding, feature selection, and tuning inside the training folds.</p>
+          <p>Future work should use real platform data, stronger validation, refined predictive targets, and business guardrails before production use.</p>
+        </section>
+
+        <section class="section compact">
+          <h2>Source Snapshot</h2>
+          <table class="mini-table tight">
+            <tbody>
+              <tr><td>Main report</td><td>reports/final_visual_project_report.md</td></tr>
+              <tr><td>Cross-check report</td><td>reports/final_integrated_project_report.md</td></tr>
+              <tr><td>Repository</td><td>https://github.com/xur-2002/project</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="source">Sources: final visual report, integrated report, repository metric CSVs, and generated figures under <b>reports/outputs</b> and <b>reports/figures</b>. All metrics shown are read from repository outputs.</div>
+      <div class="note">Created with assistance from ChatGPT</div>
+    </footer>
+  </main>
+</body>
+</html>
