@@ -243,6 +243,7 @@
     margin-top: 0.005in;
   }
   .footer {
+    position: relative;
     padding: 0.08in 0.58in 0.16in 0.58in;
     display: flex;
     justify-content: space-between;
@@ -251,7 +252,15 @@
     font-size: 8.7pt;
     border-top: 0.018in solid #d5e0ea;
   }
-  .note { text-align: right; font-size: 8.5pt; color: #667482; }
+  .note {
+    position: absolute;
+    right: 0.58in;
+    bottom: 0.1in;
+    text-align: right;
+    font-size: 7.6pt;
+    color: #667482;
+    white-space: nowrap;
+  }
   .source { max-width: 12in; line-height: 1.2; }
   .tight td, .tight th { padding-top: 0.042in; padding-bottom: 0.042in; }
   .small { font-size: 9.8pt; line-height: 1.24; }
